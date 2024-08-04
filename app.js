@@ -1,14 +1,120 @@
 
-// 繰り返し処理 for文→繰り返し処理の回数を決める
-let i;
-let num = 0;
-let limit = 500
 
-for(i = 1; i < limit; i++){
-  num = num + i;
+// じゃんけんのシステム
+// 分岐① 入力されたものがグーチョキパーかそれ以外か？
+// グーチョキパーとキャンセルのいずれか→続きの処理にいく
+// いずれでもない場合、while文でalertの表示と入力フォームを再表示する。繰り返し処理
+let user_hand = prompt('じゃんけんの手をグー、チョキ、パーから選んでください。');
+while ((user_hand != "グー") && (user_hand != "チョキ") && (user_hand != "パー") && (user_hand != null)){
+  alert('グー・チョキ・パーのいずれかを入力して下さい');
+  user_hand = prompt('じゃんけんの手をグー、チョキ、パーから選んでください。');
+}
+let js_hand = getJShand();
+let judge = winLose(user_hand, js_hand);
+
+// 結果の分岐→処理の結果勝ち負けを表示する or キャンセルの場合の出力処理を記述
+if (user_hand != null){
+  alert('あなたの選んだ手は' + user_hand + 'です。\nJavaScriptの選んだ手は' + js_hand + 'です。\n結果は' + judge + 'です。');
+} else {
+  alert("またチャレンジしてね")
 }
 
-alert ('1から' + limit + 'まで足し算した結果は' + num + 'です');
+function getJShand(){
+  let js_hand_num = Math.floor(Math.random() * 3);
+  let hand;
+  if (js_hand_num == 0){
+    hand = "グー";
+  } else if (js_hand_num == 1){
+    hand = "チョキ";
+  } else if (js_hand_num == 2){
+    hand = "パー";
+  }
+  return hand;
+}
+
+
+// ユーザの手とJavaScriptのじゃんけんの手を比べる関数
+function winLose(user, js){
+  let winLoseStr;
+  if (user == "グー"){
+    if (js == "グー"){
+      winLoseStr = "あいこ";
+    } else if (js == "チョキ"){
+      winLoseStr = "勝ち";
+    } else if (js == "パー"){
+      winLoseStr = "負け";
+    }
+  } else if (user == "チョキ"){
+    if (js == "グー"){
+      winLoseStr = "負け";
+    } else if (js == "チョキ"){
+      winLoseStr = "あいこ";
+    } else if (js == "パー"){
+      winLoseStr = "勝ち";
+    }
+  } else if (user == "パー"){
+    if (js == "グー"){
+      winLoseStr = "勝ち";
+    } else if (js == "チョキ"){
+      winLoseStr = "負け";
+    } else if (js == "パー"){
+      winLoseStr = "あいこ";
+    }
+  }
+  return winLoseStr;
+}
+
+// じゃんけんの手をランダムに選択する関数を追加していく
+// function getJShand(){
+//   let js_hand_num = Math.floor( Math.random() * 3);
+
+//   if(js_hand_num == 0){
+//     js_hand = "グー";
+//   } else if(js_hand_num == 1){
+//     js_hand = "チョキ";
+//   } else if(js_hand_num == 2){
+//     js_hand = "パー";
+//   }
+
+//   return js_hand;
+// }
+
+
+// 複数の関数を定義する
+// let user_hand = prompt('じゃんけんの手をグー、チョキ、パーから選んでください。');
+
+// alert('あなたの選んだ手は' + user_hand + 'です');
+
+
+
+
+// 入力ダイアログで値を入力してもらう
+// let promptStr = prompt('何か好きな文字を入力してください。');
+
+// alert(promptStr);
+
+
+// 関数：簡単な引数を記述してみる
+// let alertString;
+
+// alertString = addString("WebCamp");
+// alert(alertString);
+
+// function addString(strA){
+//   let addStr = "Hello " + strA;
+//   return addStr
+// }
+
+// 繰り返し処理 for文→繰り返し処理の回数を決める
+// let i;
+// let num = 0;
+// let limit = 500
+
+// for(i = 1; i < limit; i++){
+//   num = num + i;
+// }
+
+// alert ('1から' + limit + 'まで足し算した結果は' + num + 'です');
 
 // 繰り返し処理 while文→trueである限り処理を実行し続ける
 // let max = 1000;
